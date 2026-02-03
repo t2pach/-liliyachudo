@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+    --primary: 328 100% 54%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 45 100% 50%;
+    --secondary-foreground: 0 0% 10%;
+    --muted: 340 100% 97%;
+    --muted-foreground: 0 0% 42%;
+    --accent: 195 100% 50%;
+    --accent-foreground: 0 0% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 340 30% 90%;
+    --input: 340 30% 90%;
+    --ring: 328 100% 54%;
+    --radius: 0.625rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 328 100% 54%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 340 100% 97%;
+    --sidebar-accent-foreground: 0 0% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 328 100% 54%;
+    
+    /* Brand colors */
+    --color-primary: #ff1493;
+    --color-secondary: #ffd700;
+    --color-accent: #00bfff;
+    --color-tertiary: #ff6b35;
+    --color-success: #10b981;
+    --bg-light: #fff5f8;
+    --text-primary: #1a1a1a;
+    --text-secondary: #6b7280;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+}
+
+@layer components {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #ff1493 0%, #ff6b35 100%);
+  }
+  
+  .bg-pattern {
+    background-image: radial-gradient(circle at 20% 80%, rgba(255, 20, 147, 0.08) 0%, transparent 50%),
+                      radial-gradient(circle at 80% 20%, rgba(255, 107, 53, 0.08) 0%, transparent 50%),
+                      radial-gradient(circle at 40% 40%, rgba(255, 215, 0, 0.05) 0%, transparent 40%);
+  }
+  
+  .section-padding {
+    @apply py-16 md:py-24 lg:py-32;
+  }
+  
+  .container-custom {
+    @apply w-full px-4 sm:px-6 lg:px-8 xl:px-12 mx-auto;
+    max-width: 1400px;
+  }
+  
+  .card-hover {
+    @apply transition-all duration-300 ease-out;
+  }
+  
+  .card-hover:hover {
+    @apply -translate-y-1 shadow-lg;
+  }
+  
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 md:px-8 md:py-4 
+           bg-brand-pink text-white font-semibold rounded-xl
+           transition-all duration-300 ease-out
+           hover:bg-opacity-90 hover:shadow-glow hover:-translate-y-0.5
+           active:translate-y-0;
+  }
+  
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 md:px-8 md:py-4
+           border-2 border-brand-pink text-brand-pink font-semibold rounded-xl
+           bg-transparent
+           transition-all duration-300 ease-out
+           hover:bg-brand-pink hover:text-white hover:-translate-y-0.5
+           active:translate-y-0;
+  }
+  
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-md rounded-2xl border border-white/20 shadow-lg;
+  }
+}
+
+@layer utilities {
+  .animate-delay-100 {
+    animation-delay: 100ms;
+  }
+  .animate-delay-200 {
+    animation-delay: 200ms;
+  }
+  .animate-delay-300 {
+    animation-delay: 300ms;
+  }
+  .animate-delay-400 {
+    animation-delay: 400ms;
+  }
+  .animate-delay-500 {
+    animation-delay: 500ms;
+  }
+}
