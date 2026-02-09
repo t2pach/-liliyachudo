@@ -3,12 +3,13 @@ import { ChevronDown, Check, X, ArrowDown } from 'lucide-react';
 import { services, iconMap } from '@/mock';
 import type { Service } from '@/mock';
 
-// Scroll to element with delay
+// Scroll to element immediately
 const scrollToElement = (element: HTMLElement | null) => {
   if (element) {
-    setTimeout(() => {
+    // Use requestAnimationFrame for next frame scroll
+    requestAnimationFrame(() => {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
+    });
   }
 };
 
@@ -79,10 +80,19 @@ const ServiceDetail = ({
 }) => {
   const IconComponent = iconMap[service.icon];
   const featuresRef = useRef<HTMLDivElement>(null);
+  const scrollTimeoutRef = useRef<number | null>(null);
 
   // Scroll to features section when component mounts or when details are shown
   useEffect(() => {
-    scrollToElement(featuresRef.current);
+    scrollTimeoutRef.current = window.requestAnimationFrame(() => {
+      scrollToElement(featuresRef.current);
+    });
+    
+    return () => {
+      if (scrollTimeoutRef.current) {
+        cancelAnimationFrame(scrollTimeoutRef.current);
+      }
+    };
   }, []);
 
   return (

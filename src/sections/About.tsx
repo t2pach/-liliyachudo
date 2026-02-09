@@ -23,20 +23,22 @@ const AnimatedCounter = ({
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
+    const observerInstance = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
+          // Stop observing after intersection is detected
+          observerInstance.unobserve(entry.target);
         }
       },
       { threshold: 0.5 }
     );
 
     if (ref.current) {
-      observer.observe(ref.current);
+      observerInstance.observe(ref.current);
     }
 
-    return () => observer.disconnect();
+    return () => observerInstance.disconnect();
   }, []);
 
   useEffect(() => {
@@ -46,18 +48,21 @@ const AnimatedCounter = ({
     const steps = 60;
     const increment = value / steps;
     let current = 0;
+    let timerRef: ReturnType<typeof setInterval> | null = null;
 
-    const timer = setInterval(() => {
+    timerRef = setInterval(() => {
       current += increment;
       if (current >= value) {
         setCount(value);
-        clearInterval(timer);
+        if (timerRef) clearInterval(timerRef);
       } else {
         setCount(Math.floor(current));
       }
     }, duration / steps);
 
-    return () => clearInterval(timer);
+    return () => {
+      if (timerRef) clearInterval(timerRef);
+    };
   }, [isVisible, value]);
 
   return (

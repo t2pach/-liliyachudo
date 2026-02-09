@@ -6,10 +6,17 @@ const Hero = () => {
   const patternRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      if (patternRef.current) {
-        const scrollY = window.scrollY;
-        patternRef.current.style.transform = `translateY(${scrollY * 0.1}px)`;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          if (patternRef.current) {
+            const scrollY = window.scrollY;
+            patternRef.current.style.transform = `translateY(${scrollY * 0.1}px)`;
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
