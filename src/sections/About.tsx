@@ -19,10 +19,16 @@ const AnimatedCounter = ({
   label: string;
 }) => {
   const [count, setCount] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(
+    () => typeof window !== 'undefined' && !('IntersectionObserver' in window)
+  );
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (isVisible) {
+      return;
+    }
+
     const observerInstance = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -39,7 +45,7 @@ const AnimatedCounter = ({
     }
 
     return () => observerInstance.disconnect();
-  }, []);
+  }, [isVisible]);
 
   useEffect(() => {
     if (!isVisible) return;

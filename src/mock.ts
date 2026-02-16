@@ -255,7 +255,7 @@ export const advantages: Advantage[] = [
 
 export const companyInfo: CompanyInfo = {
   name: "Лилия Чудо",
-  description: "Создаем незабываемые праздники и волшебные моменты с 2015 года",
+  description: "Создаем незабываемые праздники и волшебные моменты с 2013 года",
   experience: "13+ лет опыта",
   events: "1500+ мероприятий",
   clients: "15000+ довольных клиентов",

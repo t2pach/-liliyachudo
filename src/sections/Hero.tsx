@@ -1,6 +1,10 @@
 import { useEffect, useRef } from 'react';
-import { Phone, Sparkles, ChevronDown } from 'lucide-react';
+import { Phone, Sparkles } from 'lucide-react';
 import { stats, companyInfo } from '@/mock';
+
+const AVATAR_FALLBACK_SRC = `data:image/svg+xml;utf8,${encodeURIComponent(
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="100" cy="100" r="100" fill="#fff5f8"/><text x="100" y="130" text-anchor="middle" font-size="80" fill="#ff1493">Л</text></svg>'
+)}`;
 
 const Hero = () => {
   const patternRef = useRef<HTMLDivElement>(null);
@@ -56,7 +60,7 @@ const Hero = () => {
       <div className="relative z-10 container-custom py-20 md:py-32">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
           
-          {/* Left Side - Photo & Badge */}
+          {/* Left Side - Photo */}
           <div className="flex-shrink-0 relative">
             <div className="relative">
               {/* Photo Frame with Glow */}
@@ -68,17 +72,12 @@ const Hero = () => {
                     alt="Лилия Чудо"
                     className="w-full h-full object-cover"
                     onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="100" cy="100" r="100" fill="%23fff5f8"/><text x="100" y="130" text-anchor="middle" font-size="80" fill="%23ff1493">Л</text></svg>';
+                      const target = e.currentTarget;
+                      target.onerror = null;
+                      target.src = AVATAR_FALLBACK_SRC;
                     }}
                   />
                 </div>
-              </div>
-              
-              {/* Experience Badge */}
-              <div className="absolute -bottom-2 -right-2 md:-bottom-4 md:-right-4 bg-white rounded-2xl shadow-lg px-3 py-2 md:px-4 md:py-3 flex items-center gap-2 animate-float">
-                <Sparkles className="w-4 h-4 md:w-5 md:h-5 text-brand-pink" />
-                <span className="text-xs md:text-sm font-bold text-gray-800">13+ лет</span>
               </div>
             </div>
           </div>
@@ -139,16 +138,6 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <button 
-          onClick={() => scrollToSection('services')}
-          className="p-2 rounded-full bg-white/80 backdrop-blur-sm shadow-lg hover:bg-white transition-colors"
-          aria-label="Прокрутить вниз"
-        >
-          <ChevronDown className="w-6 h-6 text-brand-pink" />
-        </button>
-      </div>
     </section>
   );
 };

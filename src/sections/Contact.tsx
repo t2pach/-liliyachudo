@@ -1,16 +1,9 @@
-import { Phone, Instagram, Send, MessageCircle, ExternalLink } from 'lucide-react';
+import { Phone, Send, MessageCircle, ExternalLink } from 'lucide-react';
 import { companyInfo } from '@/mock';
 
 const Contact = () => {
 
   const socialLinks = [
-    {
-      name: 'Instagram',
-      handle: companyInfo.socials.instagram,
-      url: `https://instagram.com/${companyInfo.socials.instagram.replace('@', '')}`,
-      icon: Instagram,
-      color: 'hover:bg-gradient-to-br hover:from-purple-500 hover:via-pink-500 hover:to-orange-500 hover:text-white'
-    },
     {
       name: 'VKontakte',
       handle: 'vk.ru/liliyachudo18',
